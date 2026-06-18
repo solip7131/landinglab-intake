@@ -34,7 +34,8 @@ const SECTIONS = [
   '03. 메뉴 소개',
   '04. 리뷰',
   '05. 창업 비용',
-  '06. 본사 지원 + 플로팅 CTA',
+  '06. 본사 지원',
+  '07. 플로팅 CTA',
 ];
 
 export default function Outro({ onReset }: OutroProps) {
