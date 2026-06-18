@@ -8,8 +8,10 @@ CREATE TABLE IF NOT EXISTS submissions (
   main_menu              TEXT,
   founded_year           TEXT,
   slogan                 TEXT,
+  store_type             TEXT,
   strengths              TEXT,
   differentiation        TEXT,
+  brand_links            TEXT,
   avg_monthly_sales      TEXT,
   avg_net_profit         TEXT,
   food_cost_ratio        TEXT,
@@ -44,3 +46,7 @@ CREATE TABLE IF NOT EXISTS submissions (
 
 -- service_role 키를 사용하므로 RLS 비활성화 (서버 사이드 전용)
 ALTER TABLE submissions DISABLE ROW LEVEL SECURITY;
+
+-- 기존 테이블에 컬럼 추가할 경우 (이미 테이블이 있을 때)
+-- ALTER TABLE submissions ADD COLUMN IF NOT EXISTS store_type TEXT;
+-- ALTER TABLE submissions ADD COLUMN IF NOT EXISTS brand_links TEXT;

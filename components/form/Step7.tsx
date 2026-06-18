@@ -50,6 +50,7 @@ export default function Step7() {
         <p className="text-[13px] font-semibold text-[#4e5968] mb-3">보내주시면 좋은 자료들</p>
         <ul className="space-y-2">
           {[
+            '고객 리뷰 캡처본 (네이버, 배민, 쿠팡이츠 등) ⭐ 필수',
             '메뉴 사진 (고화질 JPG/PNG)',
             '매장 내외부 사진',
             '브랜드 로고 파일 (AI/PNG)',

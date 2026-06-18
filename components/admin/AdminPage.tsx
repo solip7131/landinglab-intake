@@ -8,8 +8,10 @@ interface Submission {
   main_menu: string;
   founded_year: string;
   slogan: string;
+  store_type: string;
   strengths: string;
   differentiation: string;
+  brand_links: string;
   avg_monthly_sales: string;
   avg_net_profit: string;
   food_cost_ratio: string;
@@ -49,8 +51,10 @@ const FIELD_LABELS: [keyof Submission, string][] = [
   ['main_menu',              '주메뉴'],
   ['founded_year',           '창업연도'],
   ['slogan',                 '슬로건'],
+  ['store_type',             '장사 유형'],
   ['strengths',              '브랜드 강점'],
   ['differentiation',        '차별점'],
+  ['brand_links',            '브랜드 관련 링크'],
   ['avg_monthly_sales',      '평균 월매출'],
   ['avg_net_profit',         '평균 순이익'],
   ['food_cost_ratio',        '식자재 원가율'],

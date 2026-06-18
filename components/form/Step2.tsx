@@ -46,6 +46,19 @@ export default function Step2({ formData, updateField }: Props) {
           className={textareaCls}
         />
       </FormField>
+
+      <FormField
+        label="브랜드 관련 링크"
+        hint="네이버플레이스, 배달앱, 인스타그램 등 모두 기재해주세요"
+      >
+        <textarea
+          value={formData.brandLinks}
+          onChange={(e) => updateField('brandLinks', e.target.value)}
+          placeholder="예: 네이버플레이스 https://... / 배민 https://... / 인스타 @brand_id"
+          rows={3}
+          className={textareaCls}
+        />
+      </FormField>
     </div>
   );
 }

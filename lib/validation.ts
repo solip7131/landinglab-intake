@@ -8,7 +8,8 @@ export function isStepValid(step: number, formData: FormData): boolean {
       return !!(
         formData.brandName.trim() &&
         formData.mainMenu.trim() &&
-        formData.foundedYear.trim()
+        formData.foundedYear.trim() &&
+        formData.storeType
       );
     case 2:
       return !!(formData.strengths.trim() && formData.differentiation.trim());

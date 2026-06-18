@@ -4,10 +4,12 @@ export interface FormData {
   mainMenu: string;
   foundedYear: string;
   slogan: string;
+  storeType: '' | '홀매장' | '배달매장' | '하이브리드매장';
 
   // Step 2 — 브랜드 특장점
   strengths: string;
   differentiation: string;
+  brandLinks: string;
 
   // Step 3 — 핵심 숫자
   avgMonthlySales: string;
@@ -57,8 +59,10 @@ export const initialFormData: FormData = {
   mainMenu: '',
   foundedYear: '',
   slogan: '',
+  storeType: '',
   strengths: '',
   differentiation: '',
+  brandLinks: '',
   avgMonthlySales: '',
   avgNetProfit: '',
   foodCostRatio: '',

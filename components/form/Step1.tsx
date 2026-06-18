@@ -51,6 +51,25 @@ export default function Step1({ formData, updateField }: Props) {
         />
       </FormField>
 
+      <FormField label="장사 유형" required>
+        <div className="flex gap-2">
+          {(['홀매장', '배달매장', '하이브리드매장'] as const).map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => updateField('storeType', opt)}
+              className={`flex-1 py-3.5 rounded-xl border-2 font-semibold text-[14px] transition-all active:scale-[0.98] leading-tight ${
+                formData.storeType === opt
+                  ? 'border-[#191f28] bg-[#191f28] text-white'
+                  : 'border-[#e5e8eb] bg-white text-[#4e5968]'
+              }`}
+            >
+              {opt === '하이브리드매장' ? '하이브리드\n(홀+배달)' : opt}
+            </button>
+          ))}
+        </div>
+      </FormField>
+
       <FormField label="브랜드 슬로건">
         <input
           type="text"

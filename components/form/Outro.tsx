@@ -23,11 +23,11 @@ export default function Outro({ onReset }: OutroProps) {
         감사합니다
       </h2>
       <p className="text-[15px] text-[#6b7684] leading-relaxed mb-8">
-        꼼꼼히 작성해주신 덕분에
+        꼼꼼히 작성해주신 내용을 바탕으로
         <br />
-        더 좋은 랜딩페이지를 만들 수 있을 것 같아요.
+        대표님 브랜드에 꼭 맞는 디자인을 제안드리겠습니다.
         <br />
-        확인 후 영업일 1~2일 내 연락드리겠습니다.
+        영업일 1~2일 내 카카오톡으로 연락드릴게요.
       </p>
 
       <div className="w-full bg-[#fffbea] border border-[#fde68a] rounded-2xl p-5 mb-8">
