@@ -2,7 +2,7 @@ export default function Intro() {
   return (
     <div className="flex flex-col h-full pt-10 pb-4">
       <div className="mb-10">
-        <div className="text-sm font-bold text-[#3182f6] tracking-widest mb-6">RIZLAB</div>
+        <div className="text-sm font-bold text-[#3182f6] tracking-widest mb-6">LANDING LAB</div>
         <h1 className="text-[28px] font-bold text-[#191f28] leading-tight mb-5">
           가맹모집 랜딩페이지,
           <br />

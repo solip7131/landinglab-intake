@@ -99,7 +99,7 @@ export default function AdminPage() {
         <div className="w-full max-w-[400px] bg-white rounded-2xl p-8 shadow-sm">
           <div className="text-center mb-8">
             <div className="text-2xl font-bold text-[#191f28] mb-1">관리자 로그인</div>
-            <p className="text-sm text-[#8b95a1]">리즈랩 어드민 페이지</p>
+            <p className="text-sm text-[#8b95a1]">랜딩랩 어드민 페이지</p>
           </div>
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <input

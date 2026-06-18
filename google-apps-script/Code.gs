@@ -1,5 +1,5 @@
 // ============================================================
-//  리즈랩 가맹모집 의뢰 폼 — Google Apps Script
+//  랜딩랩 가맹모집 의뢰 폼 — Google Apps Script
 //  배포: 확장 프로그램 → Apps Script → 배포 → 새 배포 → 웹 앱
 //  실행 계정: 본인 계정 / 액세스 권한: 모든 사용자
 // ============================================================
@@ -141,7 +141,7 @@ function sendEmailNotification(d) {
   const adminEmail = getAdminEmail();
   if (!adminEmail) return;
 
-  const subject = '[리즈랩] 새 의뢰 접수: ' + (d.brandName || '미입력');
+  const subject = '[랜딩랩] 새 의뢰 접수: ' + (d.brandName || '미입력');
 
   const body = [
     '새로운 가맹모집 랜딩페이지 제작 의뢰가 접수되었습니다.',
