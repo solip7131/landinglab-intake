@@ -1,55 +1,106 @@
 'use client';
 import { useState, useCallback } from 'react';
-import { AdminSubmission } from '@/lib/types';
 
-const FIELD_LABELS: [keyof AdminSubmission, string][] = [
-  ['제출일시', '제출일시'],
-  ['브랜드명', '브랜드명'],
-  ['주메뉴', '주메뉴'],
-  ['창업연도', '창업연도'],
-  ['슬로건', '슬로건'],
-  ['브랜드강점', '브랜드 강점'],
-  ['차별점', '차별점'],
-  ['평균월매출', '평균 월매출'],
-  ['평균순이익', '평균 순이익'],
-  ['식자재원가율', '식자재 원가율'],
-  ['직영점수', '직영점 수'],
-  ['직영점목록', '직영점 목록'],
-  ['가맹점수', '가맹점 수'],
-  ['가맹점목록', '가맹점 목록'],
-  ['가맹비', '가맹비'],
-  ['인테리어비', '인테리어비'],
-  ['초도물류비', '초도물류비'],
-  ['총창업비용', '총 창업비용'],
-  ['로열티여부', '로열티 여부'],
-  ['로열티상세', '로열티 상세'],
-  ['교육비', '교육비'],
-  ['마케팅지원', '마케팅 지원'],
-  ['식자재공급', '식자재 공급'],
-  ['기타지원', '기타 지원'],
-  ['특별혜택', '특별 혜택'],
-  ['상담전화', '상담 전화'],
-  ['카카오채널', '카카오 채널'],
-  ['상담시간', '상담 시간'],
-  ['상호명', '상호명'],
-  ['대표자명', '대표자명'],
-  ['사업자번호', '사업자번호'],
-  ['주소', '주소'],
-  ['대표전화', '대표전화'],
-  ['이메일', '이메일'],
-  ['강조포인트', '강조 포인트'],
-  ['참고URL', '참고 URL'],
-  ['기타전달사항', '기타 전달사항'],
+interface Submission {
+  id: number;
+  created_at: string;
+  brand_name: string;
+  main_menu: string;
+  founded_year: string;
+  slogan: string;
+  strengths: string;
+  differentiation: string;
+  avg_monthly_sales: string;
+  avg_net_profit: string;
+  food_cost_ratio: string;
+  direct_store_count: string;
+  direct_store_names: string;
+  franchise_store_count: string;
+  franchise_store_names: string;
+  franchise_fee: string;
+  interior_cost: string;
+  initial_logistics_cost: string;
+  total_estimated_cost: string;
+  has_royalty: string;
+  royalty_details: string;
+  training_fee: string;
+  marketing_support: string;
+  supply_method: string;
+  other_support: string;
+  special_benefits: string;
+  consultation_phone: string;
+  kakao_channel: string;
+  consultation_hours: string;
+  company_name: string;
+  ceo_name: string;
+  business_number: string;
+  address: string;
+  main_phone: string;
+  business_email: string;
+  emphasis_points: string;
+  reference_urls: string;
+  additional_notes: string;
+  [key: string]: string | number;
+}
+
+const FIELD_LABELS: [keyof Submission, string][] = [
+  ['created_at',             '제출일시'],
+  ['brand_name',             '브랜드명'],
+  ['main_menu',              '주메뉴'],
+  ['founded_year',           '창업연도'],
+  ['slogan',                 '슬로건'],
+  ['strengths',              '브랜드 강점'],
+  ['differentiation',        '차별점'],
+  ['avg_monthly_sales',      '평균 월매출'],
+  ['avg_net_profit',         '평균 순이익'],
+  ['food_cost_ratio',        '식자재 원가율'],
+  ['direct_store_count',     '직영점 수'],
+  ['direct_store_names',     '직영점 목록'],
+  ['franchise_store_count',  '가맹점 수'],
+  ['franchise_store_names',  '가맹점 목록'],
+  ['franchise_fee',          '가맹비'],
+  ['interior_cost',          '인테리어비'],
+  ['initial_logistics_cost', '초도물류비'],
+  ['total_estimated_cost',   '총 창업비용'],
+  ['has_royalty',            '로열티 여부'],
+  ['royalty_details',        '로열티 상세'],
+  ['training_fee',           '교육비'],
+  ['marketing_support',      '마케팅 지원'],
+  ['supply_method',          '식자재 공급'],
+  ['other_support',          '기타 지원'],
+  ['special_benefits',       '특별 혜택'],
+  ['consultation_phone',     '상담 전화'],
+  ['kakao_channel',          '카카오 채널'],
+  ['consultation_hours',     '상담 시간'],
+  ['company_name',           '상호명'],
+  ['ceo_name',               '대표자명'],
+  ['business_number',        '사업자번호'],
+  ['address',                '주소'],
+  ['main_phone',             '대표전화'],
+  ['business_email',         '이메일'],
+  ['emphasis_points',        '강조 포인트'],
+  ['reference_urls',         '참고 URL'],
+  ['additional_notes',       '기타 전달사항'],
 ];
 
 export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [submissions, setSubmissions] = useState<AdminSubmission[]>([]);
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
   const [authPassword, setAuthPassword] = useState('');
+
+  const fetchData = useCallback(async (pw: string) => {
+    const res = await fetch('/api/admin', {
+      headers: { 'x-admin-password': pw },
+    });
+    if (res.status === 401) throw new Error('UNAUTHORIZED');
+    if (!res.ok) throw new Error('FETCH_ERROR');
+    const data = await res.json();
+    return data.rows as Submission[];
+  }, []);
 
   const handleLogin = useCallback(
     async (e: React.FormEvent) => {
@@ -57,41 +108,34 @@ export default function AdminPage() {
       setLoading(true);
       setError('');
       try {
-        const res = await fetch('/api/admin', {
-          headers: { 'x-admin-password': password },
-        });
-        if (res.status === 401) {
-          setError('비밀번호가 올바르지 않습니다.');
-          return;
-        }
-        if (!res.ok) throw new Error('fetch failed');
-        const data = await res.json();
-        setSubmissions(data.rows ?? []);
+        const rows = await fetchData(password);
+        setSubmissions(rows);
         setAuthPassword(password);
         setIsLoggedIn(true);
-      } catch {
-        setError('데이터를 불러오는 중 오류가 발생했습니다.');
+      } catch (err: unknown) {
+        if (err instanceof Error && err.message === 'UNAUTHORIZED') {
+          setError('비밀번호가 올바르지 않습니다.');
+        } else {
+          setError('데이터를 불러오는 중 오류가 발생했습니다.');
+        }
       } finally {
         setLoading(false);
       }
     },
-    [password],
+    [password, fetchData],
   );
 
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin', {
-        headers: { 'x-admin-password': authPassword },
-      });
-      const data = await res.json();
-      setSubmissions(data.rows ?? []);
+      const rows = await fetchData(authPassword);
+      setSubmissions(rows);
     } catch {
       setError('새로고침 중 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }
-  }, [authPassword]);
+  }, [authPassword, fetchData]);
 
   if (!isLoggedIn) {
     return (
@@ -99,7 +143,7 @@ export default function AdminPage() {
         <div className="w-full max-w-[400px] bg-white rounded-2xl p-8 shadow-sm">
           <div className="text-center mb-8">
             <div className="text-2xl font-bold text-[#191f28] mb-1">관리자 로그인</div>
-            <p className="text-sm text-[#8b95a1]">랜딩랩 어드민 페이지</p>
+            <p className="text-sm text-[#8b95a1]">LANDING LAB 어드민</p>
           </div>
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <input
@@ -113,7 +157,7 @@ export default function AdminPage() {
             <button
               type="submit"
               disabled={loading || !password}
-              className="w-full py-4 rounded-2xl bg-[#191f28] text-white font-semibold text-[15px] disabled:bg-[#e5e8eb] disabled:text-[#aeb5bc]"
+              className="w-full py-4 rounded-2xl bg-[#191f28] text-white font-semibold text-[15px] disabled:bg-[#e5e8eb] disabled:text-[#aeb5bc] transition-colors"
             >
               {loading ? '확인 중...' : '로그인'}
             </button>
@@ -148,26 +192,36 @@ export default function AdminPage() {
           </div>
         </div>
 
+        {error && (
+          <div className="mb-4 p-3 bg-red-50 rounded-xl text-sm text-red-600">{error}</div>
+        )}
+
         {submissions.length === 0 ? (
           <div className="bg-white rounded-2xl p-12 text-center text-[#8b95a1] text-sm">
             아직 제출된 의뢰가 없습니다.
           </div>
         ) : (
           <div className="flex flex-col gap-3">
-            {[...submissions].reverse().map((sub, idx) => {
-              const isOpen = expandedIndex === idx;
+            {submissions.map((sub) => {
+              const isOpen = expandedId === sub.id;
+              const date = sub.created_at
+                ? new Date(sub.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+                : '-';
               return (
-                <div key={idx} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#f2f4f6]">
+                <div
+                  key={sub.id}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#f2f4f6]"
+                >
                   <button
                     className="w-full px-5 py-4 text-left flex items-center justify-between hover:bg-[#fafafa] transition-colors"
-                    onClick={() => setExpandedIndex(isOpen ? null : idx)}
+                    onClick={() => setExpandedId(isOpen ? null : sub.id)}
                   >
                     <div>
                       <p className="text-[15px] font-bold text-[#191f28]">
-                        {sub['브랜드명'] || '(브랜드명 없음)'}
+                        {sub.brand_name || '(브랜드명 없음)'}
                       </p>
                       <p className="text-[13px] text-[#8b95a1] mt-0.5">
-                        {sub['주메뉴']} · {sub['제출일시']}
+                        {sub.main_menu} · {date}
                       </p>
                     </div>
                     <span className="text-[#aeb5bc] text-lg">{isOpen ? '▲' : '▽'}</span>
@@ -185,7 +239,7 @@ export default function AdminPage() {
                                 {label}
                               </p>
                               <p className="text-[14px] text-[#191f28] whitespace-pre-wrap break-words">
-                                {val}
+                                {String(val)}
                               </p>
                             </div>
                           );

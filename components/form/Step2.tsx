@@ -22,12 +22,12 @@ export default function Step2({ formData, updateField }: Props) {
       <FormField
         label="우리 브랜드만의 강점"
         required
-        hint="독자 개발 소스, 특허 조리법, 수상 이력 등 구체적으로 적어주세요"
+        hint="숫자와 사실로 말해주세요. 막연한 표현보다 구체적인 수치가 예비 가맹점주의 신뢰를 만듭니다."
       >
         <textarea
           value={formData.strengths}
           onChange={(e) => updateField('strengths', e.target.value)}
-          placeholder="예: 20년 노하우의 독자 개발 소스 보유, 2023 대한민국 프랜차이즈 대상 수상"
+          placeholder="예: 조리 시간 단 5분 / 시그니처 메뉴 보유 / 재주문율 68% / 객단가 평균 3만원"
           rows={4}
           className={textareaCls}
         />
@@ -36,12 +36,12 @@ export default function Step2({ formData, updateField }: Props) {
       <FormField
         label="경쟁 브랜드 대비 차별점"
         required
-        hint="비슷한 업종의 다른 브랜드와 어떻게 다른지 적어주세요"
+        hint="'왜 우리 브랜드여야 하는가'에 대한 답을 적어주세요. 가격, 맛, 운영 방식, 본사 지원 등 어떤 면에서도 좋아요."
       >
         <textarea
           value={formData.differentiation}
           onChange={(e) => updateField('differentiation', e.target.value)}
-          placeholder="예: 경쟁사 대비 낮은 로열티, 365일 본사 A/S 지원, 메뉴 정기 업데이트"
+          placeholder="예: 본사 직배송으로 식재료 수급 걱정 없음 / 타 브랜드 대비 낮은 초기 창업비용 / 조리 공정 단순화로 아르바이트 의존도 최소화"
           rows={4}
           className={textareaCls}
         />

@@ -9,27 +9,12 @@ export default function Intro() {
           지금 바로 시작해보세요
         </h1>
         <p className="text-[16px] text-[#6b7684] leading-relaxed">
-          브랜드 정보를 꼼꼼히 작성할수록
+          브랜드의 강점, 저희가 대신 전달해드립니다.
           <br />
-          예비 창업자의 관심도가 높아집니다.
-          <br />약 5~10분 정도 소요됩니다.
+          <span className="font-bold text-[#191f28]">
+            작성하신 한 줄 한 줄이 예비 가맹점주를 설득합니다.
+          </span>
         </p>
-      </div>
-
-      <div className="flex flex-col gap-3 mt-4">
-        {[
-          { icon: '📋', text: '9가지 항목 입력' },
-          { icon: '⚡', text: '5~10분 소요' },
-          { icon: '📱', text: '영업일 1~2일 내 연락' },
-        ].map((item) => (
-          <div
-            key={item.text}
-            className="flex items-center gap-3 bg-[#f9fafb] rounded-xl px-4 py-3"
-          >
-            <span className="text-lg">{item.icon}</span>
-            <span className="text-[14px] font-medium text-[#4e5968]">{item.text}</span>
-          </div>
-        ))}
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ function doGet(e) {
         headers.forEach(function (header, i) {
           obj[header] = row[i] instanceof Date
             ? Utilities.formatDate(row[i], Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm')
-            : String(row[i] ?? '');
+            : String(row[i] == null ? '' : row[i]);
         });
         return obj;
       });
