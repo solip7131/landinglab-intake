@@ -160,6 +160,11 @@ export default function Outro({ onReset }: OutroProps) {
                     </span>
                   ))}
                 </div>
+                <p className="text-[12px] text-[#aeb5bc] leading-relaxed mt-3">
+                  기본 6개 섹션 외 추가 구성 시 별도 비용이 발생할 수 있습니다.
+                  <br />
+                  예: 추가 섹션 / 플로팅 배너 또는 팝업 / FAQ
+                </p>
               </div>
             </div>
           </div>
