@@ -47,24 +47,20 @@ export default function Step7() {
       </div>
 
       <div className="bg-[#f9fafb] rounded-2xl p-5">
-        <p className="text-[13px] font-semibold text-[#4e5968] mb-3">필수 첨부 자료</p>
+        <p className="text-[13px] font-semibold text-[#4e5968] mb-3">⭐ 필수 첨부 자료</p>
         <ul className="space-y-2">
           {[
-            { text: '메뉴 사진 (고화질 JPG/PNG)', required: true },
-            { text: '매장 내외부 사진', required: true },
-            { text: '브랜드 로고 파일 (AI/PNG)', required: true },
-            { text: '배달앱 / 네이버플레이스 고객 리뷰 캡처본', required: true },
-            { text: '언론 기사 또는 방송 캡처', required: false },
-            { text: '기존 홍보물, 카탈로그 등', required: false },
+            '고객 리뷰 캡처본 (네이버, 배민, 쿠팡이츠 등)',
+            '메뉴 사진',
+            '매장 내외부 사진',
+            '브랜드 로고 파일 (AI/PNG)',
+            '언론 기사 또는 방송 이미지나 영상 (있는 경우)',
+            '관련 영상 - 브랜드 홍보영상, 대표자 또는 점주 인터뷰 (있는 경우)',
+            '기존 홍보물, 카탈로그 등 (있는 경우)',
           ].map((item) => (
-            <li key={item.text} className="flex items-center gap-2 text-[14px]">
-              <span className={item.required ? 'text-[#3182f6]' : 'text-[#aeb5bc]'}>·</span>
-              <span className={item.required ? 'text-[#4e5968]' : 'text-[#aeb5bc]'}>
-                {item.text}
-                {!item.required && (
-                  <span className="text-[12px] ml-1">(선택)</span>
-                )}
-              </span>
+            <li key={item} className="flex items-start gap-2 text-[14px] text-[#6b7684]">
+              <span className="text-[#3182f6] mt-0.5">·</span>
+              {item}
             </li>
           ))}
         </ul>
